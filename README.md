@@ -72,6 +72,15 @@ php artisan serve
 
 Visit `http://localhost:8000` to see the application.
 
+### Alternative: Using Laravel Herd
+
+Or, you can use [Laravel Herd](https://herd.laravel.com/) - a native Laravel development environment:
+
+1. **Install Herd** from [herd.laravel.com](https://herd.laravel.com/)
+2. **Add your project** to Herd by opening the project folder in Herd
+3. **Access your site** at `http://student-management.test` (or your chosen domain)
+
+
 ## Project Structure
 
 - **Models**: `Student`, `ClassModel`, `Section` - Basic Eloquent models with relationships
@@ -96,7 +105,3 @@ Since this is a learning project, feel free to:
 - Try adding new features
 - Suggest improvements
 - Use it as a reference for your own Laravel + Inertia + React projects
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
