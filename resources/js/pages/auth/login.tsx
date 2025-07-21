@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -35,10 +35,22 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         });
     };
 
+    // Login credintals for demo login:
+    useEffect(() => {
+        setData({
+            email: 'demo@example.com',
+            password: 'demo1234',
+            remember: false,
+        });
+    }, []);
+
+
     return (
         <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
             <Head title="Log in" />
-
+            <p className="text-sm text-center text-red-800 mt-2">
+                Demo Login: <code>demo@example.com</code> / <code>demo1234</code>
+            </p>
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
@@ -96,12 +108,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </Button>
                 </div>
 
-                <div className="text-center text-sm text-muted-foreground">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
-                </div>
+
             </form>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
