@@ -34,7 +34,7 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: '#',
+        href: 'https://github.com/AymanHammadi/student-management',
         icon: Folder,
     },
 
