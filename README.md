@@ -85,7 +85,7 @@ Or, you can use [Laravel Herd](https://herd.laravel.com/) - a native Laravel dev
 
 - **Models**: `Student`, `ClassModel`, `Section` - Basic Eloquent models with relationships
 - **Controllers**: RESTful controllers for CRUD operations
-- **Frontend**: React components with TypeScript, using Inertia.js for SPA-like experience
+- **Frontend**: React components with TypeScript, using Inertia.js 
 - **Themes**: Multiple appearance options (Light, Dark, Green, System)
 - **Authentication**: Laravel Breeze with Inertia React preset
 
