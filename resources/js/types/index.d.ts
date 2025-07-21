@@ -100,3 +100,10 @@ export interface PaginationResponse<T> {
 
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export type SharedData = {
+    auth: Auth;
+    ziggy: Config & { location: string };
+    sidebarOpen: boolean;
+    breadcrumbs: BreadcrumbItemType[];
+};
