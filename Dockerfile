@@ -13,8 +13,6 @@ WORKDIR /var/www/html
 
 # Copy the application code including the populated SQLite database
 COPY . .
-COPY .env .env
-
 
 RUN chown -R www-data:www-data database storage bootstrap/cache
 RUN chmod -R 775 database storage bootstrap/cache
