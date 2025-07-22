@@ -13,7 +13,9 @@ Dockerfile
 
 # Environment files
 .env
-.env.*
+.env.example
+.env.production
+
 
 # Development dependencies
 node_modules/
