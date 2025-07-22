@@ -38,7 +38,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     // Login credintals for demo login:
     useEffect(() => {
         setData({
-            email: 'demo@example.com',
+            email: 'demo@test.com',
             password: 'demo1234',
             remember: false,
         });
@@ -51,7 +51,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
             <Head title="Log in" />
             <p className="text-sm text-center text-red-800 mt-2">
-                Demo Login: <code>demo@example.com</code> / <code>demo1234</code>
+                Demo Login: <code>demo@test.com</code> / <code>demo1234</code>
             </p>
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
