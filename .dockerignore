@@ -13,7 +13,6 @@ Dockerfile
 
 # Environment files
 .env
-.env.example
 .env.production
 
 
