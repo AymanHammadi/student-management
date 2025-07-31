@@ -42,15 +42,10 @@ RUN chmod -R 775 /app/storage /app/bootstrap/cache /app/database
 # Build frontend assets
 RUN npm run build
 
-# Set up database and run migrations
-RUN touch /app/database/database.sqlite
-RUN chown www-data:www-data /app/database/database.sqlite
-RUN chmod 664 /app/database/database.sqlite
-RUN php artisan migrate:fresh --seed --force
-
 # Clean up npm dependencies to reduce image size
 RUN npm cache clean --force && rm -rf node_modules
 
-EXPOSE 8000
+# Make start script executable
+RUN chmod +x /app/start.sh
 
-CMD ["php", "start-server.php"]
+EXPOSE 8000
