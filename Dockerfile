@@ -33,14 +33,6 @@ RUN npm ci --only=production
 # Copy application code
 COPY . .
 
-# Create .env file from production
-RUN cp .env.production .env
-
-# Generate application key and ensure it's written to .env
-RUN php artisan key:generate --force --no-interaction
-
-# Verify the key was generated (for debugging)
-RUN grep APP_KEY .env
 
 # Set up Laravel directories and permissions
 RUN mkdir -p /app/storage/logs /app/storage/framework/cache /app/storage/framework/sessions /app/storage/framework/views /app/bootstrap/cache /app/database
