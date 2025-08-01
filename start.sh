@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# Ensure database directory exists
+mkdir -p /app/database
+
 # Create SQLite database if it doesn't exist
 if [ ! -f /app/database/database.sqlite ]; then
     echo "Creating SQLite database..."
     touch /app/database/database.sqlite
     chmod 664 /app/database/database.sqlite
+    chown www-data:www-data /app/database/database.sqlite
 fi
 
 # Clear previous caches
@@ -13,19 +17,38 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# Run migrations
-echo "Running migrations..."
-php artisan migrate --force
+# Check database state
+echo "Checking if database needs seeding..."
+if ! ./check-db.sh; then
+    echo "Database needs fresh setup, running migration and seeding..."
+    # Drop all tables and recreate with fresh data
+    php artisan migrate:fresh --force
 
-# Seed the database
-echo "Seeding the database..."
-php artisan db:seed --force
+    # Seed the database
+    echo "Seeding the database..."
+    php artisan db:seed --force
+
+    # Verify seeding worked
+    echo "Verifying seeding..."
+    if ./check-db.sh; then
+        echo "Database successfully seeded!"
+    else
+        echo "Warning: Database seeding may have failed"
+    fi
+else
+    echo "Database already has data, running migrations only..."
+    php artisan migrate --force
+fi
 
 # Cache configurations
 echo "Caching configurations..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+
+# Set proper permissions for database
+chown -R www-data:www-data /app/database
+chmod -R 775 /app/database
 
 # Start the server
 echo "Starting Laravel server..."
