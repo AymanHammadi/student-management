@@ -21,6 +21,13 @@ php artisan view:clear
 echo "Checking if database needs seeding..."
 if ! ./check-db.sh; then
     echo "Database needs fresh setup, running migration and seeding..."
+
+    # Install dev dependencies temporarily for seeding (if not already installed)
+    if ! php -r "exit(class_exists('Faker\Factory') ? 0 : 1);" 2>/dev/null; then
+        echo "Installing dependencies needed for seeding..."
+        composer install --dev --no-scripts --optimize-autoloader
+    fi
+
     # Drop all tables and recreate with fresh data
     php artisan migrate:fresh --force
 
@@ -32,6 +39,12 @@ if ! ./check-db.sh; then
     echo "Verifying seeding..."
     if ./check-db.sh; then
         echo "Database successfully seeded!"
+
+        # Clean up dev dependencies
+        if [ "$APP_ENV" = "production" ]; then
+            echo "Cleaning up dev dependencies..."
+            composer install --no-scripts --no-dev --optimize-autoloader
+        fi
     else
         echo "Warning: Database seeding may have failed"
     fi
